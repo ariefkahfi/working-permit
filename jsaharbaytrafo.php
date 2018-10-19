@@ -1,8 +1,8 @@
+<?php
+  session_start();
+?>
 <html>
 <head>
-  <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
-  <script type="text/javascript" src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
-  <script src="assets/js/jspdf-autotable.js"></script>
 </head>
 <body>
   <center>
@@ -32,7 +32,7 @@
           <tr>
             <td rowspan="1" id="content_surat"><b>Pekerjaan</b></td>
             <td>:</td>
-            <td><?= isset($_POST['pekerjaan']) ? $_POST['pekerjaan'] : ''; ?></td>
+            <td><?= isset($_SESSION['pekerjaan']) ? $_SESSION['pekerjaan'] : ''; ?></td>
           </tr>
           <tr>
             <td><b>Deskripsi Pekerjaan</b></td>
@@ -118,35 +118,5 @@
       </table>
     </div>
   </center>
-  <button id="print" type="button" onclick="toPrint()">Print</button>
 </body>
-<script type="text/javascript" src="assets/js/html2pdf.bundle.min.js"></script>
-<script type="text/javascript" src="assets/js/html2canvas.min.js"></script>
-<script type="text/javascript">
-  function toPrint() {
-    var doc = new jsPDF('l', 'pt', 'a4');
-   // doc.text("From HTML", 40, 50);
-    //doc.text( 40, 50);
-    var res = doc.autoTableHtmlToJson(document.getElementById("par_pembuka"));
-    doc.autoTable(res.columns, res.data, {
-      startY: 60
-    });
-    //return doc;
-
-    //doc.autoTable(columns, rows, {
-    //  theme: "grid",
-    //  margin: 10,
-    //  styles: {
-    //    font: "courier",
-    //    fontSize: 12,
-    //    // overflow: "linebreak",
-    //    rowHeight: 8,
-    //    cellPadding: 1,
-    //    halign: "left"
-    //  }
-    //});
-    doc.save();
-  }
-  console.log(document.getElementById('par_pembuka').innerHTML);
-</script>
 </html>
